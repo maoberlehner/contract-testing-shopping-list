@@ -7,8 +7,9 @@ import {
   toggleItemCompleted,
   type ShoppingListItem,
 } from "@/repositories/shopping-list";
+import { createRating } from "@/repositories/rating";
 
-type Action = "CREATE" | "TOGGLE" | "DELETE";
+type Action = "CREATE" | "TOGGLE" | "DELETE" | "RATE";
 
 export const updateShoppingList = async (
   previousItems: ShoppingListItem[],
@@ -42,6 +43,26 @@ export const updateShoppingList = async (
       await deleteItem(id);
       revalidatePath("/");
       return previousItems.filter((item) => item.id !== id);
+    }
+    case "RATE": {
+      const id = formData.get("id") as string;
+      const productId = formData.get("productId") as string;
+      const score = parseInt(formData.get("score")?.toString() || "0", 10);
+      await createRating({
+        productId,
+        score,
+      });
+      revalidatePath("/");
+      return previousItems.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              rating: {
+                average: ((item.rating?.average || 0) + score) / 2,
+              },
+            }
+          : item
+      );
     }
   }
 };

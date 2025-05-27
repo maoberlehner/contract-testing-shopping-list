@@ -18,6 +18,12 @@
           "productId": "4065662f-a4a5-468a-86e9-1ea852458abc",
           "name": "Bread",
           "completed": true
+        },
+        {
+          "id": "53af47d7-28f4-4ae5-87e8-8f3213723024",
+          "productId": "0d774840-3f20-4710-a7b4-5bdeea73bf1d",
+          "name": "Yogurt",
+          "completed": false
         }
       ]
     }

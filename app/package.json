@@ -11,10 +11,11 @@
     "test:ui": "playwright test --ui",
     "contract:pull": "node --disable-warning=ExperimentalWarning ../utils/scripts/contract-pull.ts",
     "contract:push": "npm run contract:validate && node --disable-warning=ExperimentalWarning ../utils/scripts/contract-push.ts",
-    "contract:schema": "npm run contract:pull && openapi-typescript ./contract/dependencies/service-shopping-list.yaml -o ./repositories/service-shopping-list.d.ts",
+    "contract:schema": "npm run contract:pull && openapi-typescript ./contract/dependencies/service-shopping-list.yaml -o ./repositories/service-shopping-list.d.ts && openapi-typescript ./contract/dependencies/service-rating.yaml -o ./repositories/service-rating.d.ts",
     "contract:validate": "npm run contract:pull && node --disable-warning=ExperimentalWarning ../utils/scripts/contract-validate.ts"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

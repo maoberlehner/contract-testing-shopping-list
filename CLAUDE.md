@@ -8,8 +8,11 @@ Use context7 to lookup documentation for frameworks and libraries.
 
 ## Code Style Guidelines:
 
-- Always prefer arrow functions: `const myFunction = () => {}`
+- Use Tailwind CSS.
+- Write idiomatic Next.js 15 and React 19 code.
+- Always prefer arrow functions: `const myFunction = () => {}`.
 - Never use function declarations: `function myFunction() {}` (Exception: Only use function declarations when hoisting is specifically needed).
+- Use shadcn/ui for common UI components.
 
 ## Architecture
 

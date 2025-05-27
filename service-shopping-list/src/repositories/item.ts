@@ -1,9 +1,29 @@
 import { randomUUID } from "node:crypto";
 import type { components } from "../service-shopping-list.d.ts";
 import { serviceProduct } from "../utils/api-client.ts";
+import z from "zod";
 
-export type Item = components["schemas"]["ShoppingListItemResponse"];
-export type ItemCreate = components["schemas"]["ShoppingListItemRequest"];
+export const itemSchema: z.ZodType<
+  components["schemas"]["ShoppingListItemResponse"]
+> = z.object({
+  id: z.string(),
+  productId: z.string(),
+  quantity: z.number(),
+  name: z.string(),
+  completed: z.boolean(),
+});
+export type Item = z.infer<typeof itemSchema>;
+
+export const itemCreateSchema: z.ZodType<
+  components["schemas"]["ShoppingListItemRequest"]
+> = z.object({
+  id: z.string().optional(),
+  productId: z.string().optional(),
+  quantity: z.number().optional(),
+  name: z.string(),
+  completed: z.boolean(),
+});
+export type ItemCreate = z.infer<typeof itemCreateSchema>;
 
 let items: Item[] = [];
 

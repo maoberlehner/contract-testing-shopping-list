@@ -1,5 +1,7 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
+import { logger } from "hono/logger";
+
 import {
   add,
   list,
@@ -9,16 +11,15 @@ import {
 } from "./repositories/product.ts";
 
 const app = new Hono();
+app.use(logger());
 
 app.post("/products", async (c) => {
   const item = await c.req.json<ProductCreate>();
-  console.log("POST /products", item);
   return c.json(await add(item), 201);
 });
 
 app.get("/products", async (c) => {
   const name = c.req.param("name");
-  console.log("GET /products", name);
   return c.json(await list(name ? { filter: { name } } : undefined));
 });
 
